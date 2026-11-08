@@ -1,0 +1,471 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ai-agent-skill-library.example.com/schemas/skill-metadata.schema.json",
+  "title": "AI Agent Skill Metadata Schema",
+  "description": "JSON Schema for validating skill metadata in SKILL.md",
+  "type": "object",
+  "required": [
+    "identity",
+    "role_definition",
+    "core_competencies",
+    "knowledge_base",
+    "workflow",
+    "tools_integrations",
+    "output_standards",
+    "self_review"
+  ],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "required": [
+        "name",
+        "id",
+        "version",
+        "description",
+        "professional_role",
+        "category",
+        "target_users",
+        "required_capabilities",
+        "tags",
+        "platforms",
+        "maturity",
+        "license"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$", "minLength": 1 },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.-]+)?$" },
+        "description": { "type": "string", "minLength": 10, "maxLength": 500 },
+        "professional_role": { "type": "string", "minLength": 1 },
+        "category": {
+          "type": "string",
+          "enum": [
+            "ai-automation",
+            "software-development",
+            "digital-marketing",
+            "design-creative",
+            "business-management",
+            "data-analytics",
+            "administration",
+            "cybersecurity-it",
+            "finance-accounting",
+            "ecommerce-sales",
+            "writing-communication",
+            "education-research"
+          ]
+        },
+        "target_users": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "enum": ["freelancers", "developers", "enterprises", "startups", "smbs", "researchers", "students", "educators", "marketers", "designers", "business-owners"] }
+        },
+        "required_capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+        },
+        "platforms": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "enum": ["claude", "opencode", "cursor", "github-copilot", "generic"] }
+        },
+        "maturity": {
+          "type": "string",
+          "enum": ["alpha", "beta", "stable", "deprecated"]
+        },
+        "license": { "type": "string", "enum": ["MIT", "Apache-2.0", "BSD-3-Clause", "CC-BY-4.0"] },
+        "dependencies": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "role_definition": {
+      "type": "object",
+      "required": [
+        "professional_identity",
+        "expertise_areas",
+        "responsibilities",
+        "scope_of_work",
+        "limitations",
+        "expected_behavior"
+      ],
+      "properties": {
+        "professional_identity": { "type": "string", "minLength": 10 },
+        "expertise_areas": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "responsibilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "scope_of_work": { "type": "string", "minLength": 20 },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "expected_behavior": {
+          "type": "object",
+          "required": ["tone", "communication_style", "decision_making"],
+          "properties": {
+            "tone": { "type": "string", "enum": ["professional", "collaborative", "authoritative", "educational"] },
+            "communication_style": { "type": "string", "enum": ["concise", "detailed", "step-by-step"] },
+            "decision_making": { "type": "string", "enum": ["evidence-based", "best-practice", "creative"] }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "core_competencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "proficiency_level", "measurable_outcomes"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 10 },
+          "proficiency_level": { "type": "string", "enum": ["expert", "advanced", "intermediate", "basic"] },
+          "measurable_outcomes": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "prerequisites": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "knowledge_base": {
+      "type": "object",
+      "required": [
+        "fundamental_concepts",
+        "industry_terminology",
+        "professional_methodologies",
+        "industry_standards",
+        "best_practices",
+        "common_mistakes",
+        "practical_references"
+      ],
+      "properties": {
+        "fundamental_concepts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["concept", "description", "references"],
+            "properties": {
+              "concept": { "type": "string" },
+              "description": { "type": "string" },
+              "references": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "industry_terminology": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["term", "definition", "context"],
+            "properties": {
+              "term": { "type": "string" },
+              "definition": { "type": "string" },
+              "context": { "type": "string" }
+            }
+          }
+        },
+        "professional_methodologies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "description", "steps", "when_to_use", "limitations"],
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "steps": { "type": "array", "items": { "type": "string" } },
+              "when_to_use": { "type": "string" },
+              "limitations": { "type": "string" }
+            }
+          }
+        },
+        "industry_standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["standard", "relevance", "compliance_notes"],
+            "properties": {
+              "standard": { "type": "string" },
+              "relevance": { "type": "string" },
+              "compliance_notes": { "type": "string" }
+            }
+          }
+        },
+        "best_practices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["practice", "description", "rationale", "anti_pattern"],
+            "properties": {
+              "practice": { "type": "string" },
+              "description": { "type": "string" },
+              "rationale": { "type": "string" },
+              "anti_pattern": { "type": "string" }
+            }
+          }
+        },
+        "common_mistakes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["mistake", "consequence", "prevention"],
+            "properties": {
+              "mistake": { "type": "string" },
+              "consequence": { "type": "string" },
+              "prevention": { "type": "string" }
+            }
+          }
+        },
+        "practical_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "type", "url", "description"],
+            "properties": {
+              "title": { "type": "string" },
+              "type": { "type": "string", "enum": ["documentation", "tool", "template", "case-study", "regulation"] },
+              "url": { "type": "string", "format": "uri" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "workflow": {
+      "type": "object",
+      "required": [
+        "step_1_request_analysis",
+        "step_2_requirement_clarification",
+        "step_3_context_gathering",
+        "step_4_research",
+        "step_5_planning",
+        "step_6_task_execution",
+        "step_7_validation",
+        "step_8_quality_review",
+        "step_9_error_correction",
+        "step_10_final_delivery"
+      ],
+      "properties": {
+        "step_1_request_analysis": { "$ref": "#/definitions/workflow_step" },
+        "step_2_requirement_clarification": { "$ref": "#/definitions/workflow_step" },
+        "step_3_context_gathering": { "$ref": "#/definitions/workflow_step" },
+        "step_4_research": { "$ref": "#/definitions/workflow_step" },
+        "step_5_planning": { "$ref": "#/definitions/workflow_step" },
+        "step_6_task_execution": { "$ref": "#/definitions/workflow_step" },
+        "step_7_validation": { "$ref": "#/definitions/workflow_step" },
+        "step_8_quality_review": { "$ref": "#/definitions/workflow_step" },
+        "step_9_error_correction": { "$ref": "#/definitions/workflow_step" },
+        "step_10_final_delivery": { "$ref": "#/definitions/workflow_step" }
+      },
+      "additionalProperties": false
+    },
+    "tools_integrations": {
+      "type": "object",
+      "required": [
+        "supported_tools",
+        "required_tools",
+        "optional_tools",
+        "api_integrations",
+        "mcp_integrations",
+        "tool_prerequisites",
+        "authentication_requirements",
+        "fallback_procedures"
+      ],
+      "properties": {
+        "supported_tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tool", "type", "purpose", "required"],
+            "properties": {
+              "tool": { "type": "string" },
+              "type": { "type": "string", "enum": ["cli", "api", "mcp", "builtin"] },
+              "purpose": { "type": "string" },
+              "required": { "type": "boolean" },
+              "version": { "type": "string" }
+            }
+          }
+        },
+        "required_tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "optional_tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tool", "fallback"],
+            "properties": {
+              "tool": { "type": "string" },
+              "fallback": { "type": "string" }
+            }
+          }
+        },
+        "api_integrations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["api", "auth_type", "scopes", "rate_limits", "fallback"],
+            "properties": {
+              "api": { "type": "string" },
+              "auth_type": { "type": "string", "enum": ["oauth", "apikey", "bearer", "none"] },
+              "scopes": { "type": "array", "items": { "type": "string" } },
+              "rate_limits": { "type": "string" },
+              "fallback": { "type": "string" }
+            }
+          }
+        },
+        "mcp_integrations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["server", "capabilities", "required"],
+            "properties": {
+              "server": { "type": "string" },
+              "capabilities": { "type": "array", "items": { "type": "string" } },
+              "required": { "type": "boolean" }
+            }
+          }
+        },
+        "tool_prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tool", "setup", "verification"],
+            "properties": {
+              "tool": { "type": "string" },
+              "setup": { "type": "string" },
+              "verification": { "type": "string" }
+            }
+          }
+        },
+        "authentication_requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["service", "credentials_needed", "storage", "rotation"],
+            "properties": {
+              "service": { "type": "string" },
+              "credentials_needed": { "type": "array", "items": { "type": "string" } },
+              "storage": { "type": "string", "enum": ["env-var", "vault", "config-file"] },
+              "rotation": { "type": "string" }
+            }
+          }
+        },
+        "fallback_procedures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["scenario", "procedure", "degraded_capability"],
+            "properties": {
+              "scenario": { "type": "string" },
+              "procedure": { "type": "string" },
+              "degraded_capability": { "type": "string" }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "output_standards": {
+      "type": "object",
+      "required": [
+        "expected_deliverables",
+        "output_structure",
+        "documentation_requirements",
+        "quality_expectations",
+        "acceptance_criteria"
+      ],
+      "properties": {
+        "expected_deliverables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "format", "structure", "required"],
+            "properties": {
+              "name": { "type": "string" },
+              "format": { "type": "string", "enum": ["markdown", "json", "yaml", "code", "document", "spreadsheet"] },
+              "structure": { "type": "string" },
+              "required": { "type": "boolean" }
+            }
+          }
+        },
+        "output_structure": { "type": "object" },
+        "documentation_requirements": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "quality_expectations": {
+          "type": "object",
+          "required": ["accuracy", "completeness", "consistency", "usability"],
+          "properties": {
+            "accuracy": { "type": "string" },
+            "completeness": { "type": "string" },
+            "consistency": { "type": "string" },
+            "usability": { "type": "string" }
+          }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["criterion", "verification_method", "priority"],
+            "properties": {
+              "criterion": { "type": "string" },
+              "verification_method": { "type": "string" },
+              "priority": { "type": "string", "enum": ["critical", "high", "medium", "low"] }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "self_review": {
+      "type": "object",
+      "required": ["protocol"],
+      "properties": {
+        "protocol": { "type": "string", "const": "ANALYZE → EXECUTE → REVIEW → DETECT → FIX → RETEST → DELIVER" },
+        "no_fake_completion": { "type": "string" },
+        "bounded_retries": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "workflow_step": {
+      "type": "object",
+      "required": ["description", "inputs", "outputs", "validation"],
+      "properties": {
+        "description": { "type": "string", "minLength": 10 },
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "array", "items": { "type": "string" } },
+        "validation": { "type": "string", "minLength": 5 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

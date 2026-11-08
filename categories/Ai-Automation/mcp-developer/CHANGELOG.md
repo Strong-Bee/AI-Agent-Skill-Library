@@ -1,0 +1,71 @@
+# Changelog
+
+All notable changes to this skill.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Initial skill specification
+- Complete knowledge base with protocol, tools, resources, prompts, security, testing
+- 10-step workflow for MCP development
+- Tool integrations for MCP SDKs and testing tools
+- Output standards with acceptance criteria
+- Example references
+
+### Changed
+- N/A
+
+### Deprecated
+- N/A
+
+### Removed
+- N/A
+
+### Fixed
+- N/A
+
+### Security
+- N/A
+
+---
+
+## [1.0.0] - 2026-11-08
+
+### Added
+- Initial release
+- Core competencies: MCP Server Development, Tool Design & Schema Engineering, Resource & Template Management, MCP Security Hardening, Transport Layer Implementation, MCP Testing & Compliance
+- Workflow implementation: 10-step MCP development lifecycle
+- Knowledge base with 5 fundamental concepts, 5 terminology entries, 3 methodologies, 3 industry standards, 5 best practices, 5 common mistakes, 6 practical references
+- Tool integrations: TypeScript/Node.js, MCP TypeScript SDK, Python SDK, Zod, Vitest, MCP Inspector
+- API integrations: External APIs for tool implementations
+- MCP integrations: Filesystem, GitHub, PostgreSQL
+- Output standards: 6 deliverable types with acceptance criteria
+- Quality expectations and acceptance criteria defined
+- Examples structure defined (basic, API, database, custom, advanced)
+
+---
+
+## Release Template
+
+### [X.Y.Z] - YYYY-MM-DD
+
+#### Added
+- New features
+
+#### Changed
+- Changes in existing functionality
+
+#### Deprecated
+- Soon-to-be removed features
+
+#### Removed
+- Removed features
+
+#### Fixed
+- Bug fixes
+
+#### Security
+- Security improvements
